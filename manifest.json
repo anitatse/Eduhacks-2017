@@ -1,12 +1,24 @@
 {
-	"manifest_version": 2,
-	"name": "Instaquiz",
-	"version": "1.0",
-	"description": "Instaquiz!",
-	
-	"browser_action": { //making an extension that will add a button to the toolbar
-		"default_icon": "icon.png", 
-		"default_popup": "popup.html"
-	} 
-	//Add on 
+  "manifest_version": 2,
+  "name": "Flash Cards",
+  "version": "0.1",
+  "permissions": [
+  	"contextMenus",
+  	"tabs"
+  ],
+  "background":{
+  	"persistent": false,
+  	"scripts":["background.js"]
+  },
+  "icons":{
+  	"16": "icon-Q.png"
+  },
+  "content_scripts": [
+	  {
+	    "matches": [
+	      "<all_urls>"
+	    ],
+	    "js": ["jquery-3.2.1.js","content.js"]
+	  }
+  ]
 }
