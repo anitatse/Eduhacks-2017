@@ -1,3 +1,6 @@
+var Client = require('node-rest-client').Client;
+// var request = require('request');
+
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
   var context = "selection";
@@ -21,4 +24,52 @@ function onClickHandler(info, tab) {
   //add the card to the deck 
   // var url = "https://www.google.com/search?q=" + encodeURIComponent(sText);  
   // window.open(url, '_blank');
+}; 
+
+function POST(url, access_token) {
+    return new Promise(
+        function (resolve, reject) {
+
+            var client = new Client();
+
+            function done(data, response) {
+                client.removeListener('error', error);
+                resolve(data);
+            }
+
+            function error(err) {
+                client.removeListener('error', error);
+                reject(err);
+            }
+
+            function requestTimeout(req) {
+                reject(new Error("Request timed out"));
+            }
+
+            function responseTimeout(req) {
+                reject(new Error("Response timed out"));
+            }
+
+            var args = {
+                headers: { 'Authorization': 'Bearer ' + access_token },
+                requestConfig: { timeout: requestTimeoutLimit },
+                responseConfig: { timeout: responseTimeoutLimit }
+            };
+
+            request = client.put(url, args, done);
+            request.on('requestTimeout', requestTimeout);
+            request.on('responseTimeout', responseTimeout);
+            client.on('error', error);
+        }
+    )
+}
+
+function quizletAPI(user_id, access_token) {
+    this.user_id = user_id;
+    this.access_token = access_token;
 };
+
+//Requires a write_set-scoped access token? How to do thsi TODO
+quizletAPI.prototype.makeNewSet = function (title, terms[], definitions[], lang_terms, lang_definitions) {
+  return PUT('https://api.quizlet.com/2.0/sets'. this.access_token);
+}

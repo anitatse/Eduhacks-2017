@@ -1,1 +1,0 @@
-authBaseUrl = 'https://quizlet.com/authorize/'
