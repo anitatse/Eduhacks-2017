@@ -1,0 +1,11 @@
+{
+	"manifest_version": 2,
+	"name": "Instaquiz",
+	"version": "1.0",
+	"description": "Instaquiz!",
+	"browser_action": { //making an extension that will add a button to the toolbar
+		"default_icon": "icon.png", 
+		"popup": "background.html"
+	} 
+	//Add on 
+}
