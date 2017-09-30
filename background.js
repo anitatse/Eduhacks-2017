@@ -26,7 +26,7 @@ function onClickHandler(info, tab) {
   // window.open(url, '_blank');
 }; 
 
-function POST(url, access_token) {
+function POST(url, access_token, title, terms[], definitions[], lang_terms, lang_definitions) {
     return new Promise(
         function (resolve, reject) {
 
@@ -69,7 +69,7 @@ function quizletAPI(user_id, access_token) {
     this.access_token = access_token;
 };
 
-//Requires a write_set-scoped access token? How to do thsi TODO
+//Requires a write_set-scoped access token? How to do thsi TODO 
 quizletAPI.prototype.makeNewSet = function (title, terms[], definitions[], lang_terms, lang_definitions) {
-  return PUT('https://api.quizlet.com/2.0/sets'. this.access_token);
+  return POST('https://api.quizlet.com/2.0/sets', this.access_token, );
 }
