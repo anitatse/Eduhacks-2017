@@ -6,7 +6,8 @@
     "activeTab",
   	"contextMenus",
   	"tabs",
-  	"<all_urls>"
+  	"<all_urls>",
+    "https://quizlet.com/"
   ],
   "background":{
   	"persistent": false,
