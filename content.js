@@ -122,4 +122,30 @@ function addCard(word, def){
 function saveCard(word, definition){
 	console.log(word);
 	console.log(definition);
+
+	// The test set
+	const url = 'https://api.quizlet.com/2.0/sets/22927894/terms';
+
+    // The data we are going to send in our request
+	var data = {
+		term: word,
+		definition: definition
+	};
+
+    // The parameters for the fetch function
+	var fetchData = {
+		method: 'POST',
+        body: data,
+        headers: new Headers()
+	};
+
+    fetch(url, fetchData)
+		.then(function(response) {
+        return response.json();
+    }).then(function(data) {
+    	// log the response
+        var response = JSON.stringify(data);
+        alert(response);
+    });
+
 }
