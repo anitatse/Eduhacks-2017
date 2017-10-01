@@ -26,50 +26,57 @@ function onClickHandler(info, tab) {
   // window.open(url, '_blank');
 }; 
 
-function POST(url, access_token, title, terms[], definitions[], lang_terms, lang_definitions) {
-    return new Promise(
-        function (resolve, reject) {
+// function POST(url, access_token, title, terms[], definitions[], lang_terms, lang_definitions) {
+//     return new Promise(
+//         function (resolve, reject) {
 
-            var client = new Client();
+//             var client = new Client();
 
-            function done(data, response) {
-                client.removeListener('error', error);
-                resolve(data);
-            }
+//             function done(data, response) {
+//                 client.removeListener('error', error);
+//                 resolve(data);
+//             }
 
-            function error(err) {
-                client.removeListener('error', error);
-                reject(err);
-            }
+//             function error(err) {
+//                 client.removeListener('error', error);
+//                 reject(err);
+//             }
 
-            function requestTimeout(req) {
-                reject(new Error("Request timed out"));
-            }
+//             function requestTimeout(req) {
+//                 reject(new Error("Request timed out"));
+//             }
 
-            function responseTimeout(req) {
-                reject(new Error("Response timed out"));
-            }
+//             function responseTimeout(req) {
+//                 reject(new Error("Response timed out"));
+//             }
 
-            var args = {
-                headers: { 'Authorization': 'Bearer ' + access_token },
-                requestConfig: { timeout: requestTimeoutLimit },
-                responseConfig: { timeout: responseTimeoutLimit }
-            };
+//             var args = {
+//                 headers: { 'Authorization': 'Bearer ' + access_token },
+//                 requestConfig: { timeout: requestTimeoutLimit },
+//                 responseConfig: { timeout: responseTimeoutLimit }
+//             };
 
-            request = client.put(url, args, done);
-            request.on('requestTimeout', requestTimeout);
-            request.on('responseTimeout', responseTimeout);
-            client.on('error', error);
-        }
-    )
-}
+//             request = client.post(url, args, done);
+//             request.on('requestTimeout', requestTimeout);
+//             request.on('responseTimeout', responseTimeout);
+//             client.on('error', error);
+//         }
+//     )
+// }
 
-function quizletAPI(user_id, access_token) {
-    this.user_id = user_id;
-    this.access_token = access_token;
-};
+// function quizletAPI(user_id, access_token) {
+//     this.user_id = user_id;
+//     this.access_token = access_token;
+// };
 
-//Requires a write_set-scoped access token? How to do thsi TODO 
-quizletAPI.prototype.makeNewSet = function (title, terms[], definitions[], lang_terms, lang_definitions) {
-  return POST('https://api.quizlet.com/2.0/sets', this.access_token, );
-}
+// //Requires a write_set-scoped access token? How to do thsi TODO 
+// quizletAPI.prototype.makeNewSet = function (title, terms[], definitions[], lang_terms, lang_definitions) {
+//   return POST('https://api.quizlet.com/2.0/sets', title, terms[], definitions[], lang_terms, lang_definitions);
+// }
+
+
+
+
+
+
+
