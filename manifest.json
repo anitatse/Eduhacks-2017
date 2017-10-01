@@ -23,7 +23,7 @@
   "content_scripts": [
 	  {
 	    "matches": ["<all_urls>"],
-	    "js": ["jquery-3.2.1.js","bootstrap.min.js","content.js"],
+	    "js": ["jquery-3.2.1.js","bootstrap.min.js","content.js","main.js"],
       "css": ["bootstrap.min.css"]
 	  }
   ]
