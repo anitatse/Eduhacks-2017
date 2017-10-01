@@ -1,31 +1,67 @@
+var highLightedText;
+
 // Set up context menu at install time.
 chrome.runtime.onInstalled.addListener(function() {
-    var context = "selection";
-    var title = "Create a flash card";
-    var id = chrome.contextMenus.create({"title": title, "contexts":[context],
-        "id": "context" + context});
+  var context = "selection";
+  var title = "Add selected text to Flash cards";
+  var id = chrome.contextMenus.create({"title": title, "contexts":[context],
+                                         "id": "context" + context});  
 });
 
 // add click event
 chrome.contextMenus.onClicked.addListener(onClickHandler);
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+  highLightedText = request.highLight;
+  alert(highLightedText);
+      sendResponse({farewell: "goodbye"});
+});
+// document.onmouseup.addListener(saveHighlightedText);
+
+// function saveHighLightedText(e) {
+//   console.log("ayyyy");
+//   var text = document.getSelection().toString();
+//   if (text != ''){
+//     alert(text);
+//   }
+// }
+
+// var taskCompleted = true;
+// chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+//     if (message.request == "getWord") {
+//         sendResponse({done: taskCompleted});
+//     }
+// });
+
 // The onClicked callback function.
-function onClickHandler(info, tab) {
-    // var sText = info.selectionText;
+function onClickHandler(info, tab) { 
+  var sText = info.selectionText;
+  //change the rest to put into the flashcard deck
 
-    //change the rest to put into the flashcard deck
+  //open a pop-up to edit the card.
+  // var flashCardId = chrome.windows.create({"type": "popup"});
 
-    //open a pop-up to edit the card.
-    //var flashCard = chrome.windows.create({"type": "popup"});
-    alert('clicked!');
+  // flashCardId.document.write("<p> Hello World </p>");
+  chrome.tabs.create({
+        url: chrome.extension.getURL('background.html'),
+        active: false
+    }, function(tab) {
+        // After the tab has been created, open a window to inject the tab
+        chrome.windows.create({
+            // url: chrome.extension.getURL('background.html'),
+            tabId: tab.id,
+            type: 'popup',
+            focused: true,
+            top: 300,
+            left: 300,
+            width: 300,
+            height: 300
+            // incognito, top, left, ...
+        });
+  });
 
-    fetch('https://api.quizlet.com/2.0/users/hannerzer?access_token=aVWG3KmyyTNPQAgVyWgXFsdPHFXxFWM6SPsyBE9m&whitespace=1').then(function(response) {
-        return response.json();
-    }).then(function(data) {
-      var modified = JSON.stringify(data);
-        alert(modified);
-    });
-    //add the card to the deck
-    // var url = "https://www.google.com/search?q=" + encodeURIComponent(sText);
-    // window.open(url, '_blank');
-}
+  //add the card to the deck 
+  // var url = "https://www.google.com/search?q=" + encodeURIComponent(sText);  
+  // window.open(url, '_blank');
+};

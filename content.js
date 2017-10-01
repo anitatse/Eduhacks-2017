@@ -18,3 +18,19 @@
 //   contexts:["selection"], 
 //   onclick: getword,
 // });
+
+// if (confirm('Open dialog for testing?'))
+//     chrome.runtime.sendMessage({type:'request_password'});
+
+function saveHighLightedText() {
+  var text = document.getSelection().toString();
+  if (text != ''){
+    chrome.runtime.sendMessage({highLight: text}, function(response){
+    	console.log(response.farewell);
+    })
+  }
+}
+
+document.onmouseup = function(){
+	saveHighLightedText();
+}

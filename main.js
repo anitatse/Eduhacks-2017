@@ -1,1 +1,9 @@
-authBaseUrl = 'https://quizlet.com/authorize/'
+// authBaseUrl = 'https://quizlet.com/authorize/'
+
+
+// seond messages to content.js
+// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+//   chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
+//     console.log(response.farewell);
+//   });
+// });
